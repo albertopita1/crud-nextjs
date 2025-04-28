@@ -1,24 +1,19 @@
-version: '3.8'
+version: '3'
 
 services:
   app:
     build: .
     ports:
       - "3000:3000"
-    volumes:
-      - .:/app
-      - /app/node_modules
-    environment:
-      - NODE_ENV=development
-
+    container_name: crud-app
   jenkins:
     image: jenkins/jenkins:lts-jdk11
+    container_name: crud-jenkins
     ports:
       - "8080:8080"
       - "50000:50000"
     volumes:
-      - jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
-
+      - jenkins_home:/var/jenkins_home
 volumes:
   jenkins_home:
